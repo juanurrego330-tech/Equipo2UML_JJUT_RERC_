@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "Equipo2UML_JJUT_RERC/1.0.0": {
+        "runtime": {
+          "Equipo2UML_JJUT_RERC.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Equipo2UML_JJUT_RERC/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
