@@ -75,13 +75,41 @@ namespace Equipo2UML_JJUT_RERC
                         {
                             if (int.TryParse(contenidoArchivo[i + 1].Split(':')[1].Trim(), out int accidentes))
                             {
-                                AccidentesObtenidos += accidentes;
+                                AccidentesObtenidos = accidentes;
                             }
                         }
                     }
                 }
             }
             return AccidentesObtenidos;
+        }
+        public int ObtenerUltimoNumeroPoliza(string tipo)
+        {
+            string texto = new Archivo().leerArchivo();
+            string[] lineas = texto.Split('\n');
+
+            int max = 0;
+
+            foreach (string linea in lineas)
+            {
+                if (linea.Trim().StartsWith("# de Póliza:"))
+                {
+                    string poliza = linea.Split(':')[1].Trim();
+
+                    if (poliza.StartsWith(tipo))
+                    {
+                        string numero = poliza.Substring(1);
+
+                        if (int.TryParse(numero, out int num))
+                        {
+                            if (num > max)
+                                max = num;
+                        }
+                    }
+                }
+            }
+
+            return max;
         }
         public bool RevisarPlaca(string placa)
         {
@@ -144,7 +172,7 @@ namespace Equipo2UML_JJUT_RERC
                 if (A)
                 {
                     contadorA++;
-                    poliza = "A" + contadorA;
+                    poliza = "A" + (ObtenerUltimoNumeroPoliza("A") + 1);
                     TipoSeguroA SeguroA = new TipoSeguroA();
                     SeguroA.llenarDatos(nombre, placa, marca, precioVeh, inicio, fin, numeroAccidentes, añosSinAccidentes, "A");
                     double costoAnualA = SeguroA.CalcularCostoAnual();
@@ -158,7 +186,7 @@ namespace Equipo2UML_JJUT_RERC
                 if (B)
                 {   
                     contadorB++;
-                    poliza = "B" + contadorB;
+                    poliza = "B" + (ObtenerUltimoNumeroPoliza("B") + 1);
                     TipoSeguroB SeguroB = new TipoSeguroB();
                     SeguroB.llenarDatos(nombre, placa, marca, precioVeh, inicio, fin, numeroAccidentes, añosSinAccidentes, "B");
                     double costoAnualB = SeguroB.CalcularCostoAnual();
@@ -172,7 +200,7 @@ namespace Equipo2UML_JJUT_RERC
                 if (C)
                 {   
                     contadorC++;
-                    poliza = "C" + contadorC;
+                    poliza = "C" + (ObtenerUltimoNumeroPoliza("C") + 1);
                     TipoSeguroC SeguroC = new TipoSeguroC();
                     SeguroC.llenarDatos(nombre, placa, marca, precioVeh, inicio, fin, numeroAccidentes, añosSinAccidentes, "C");
                     double costoAnualC = SeguroC.CalcularCostoAnual();
